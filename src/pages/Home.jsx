@@ -1,6 +1,9 @@
 import Header from "../components/Header/Header";
 import Latest from "../components/Latest/Latest";
+import LeftSideNav from "../components/LeftSideNav/LeftSideNav";
 import Navbar from "../components/Navbar/Navbar";
+import NewsContent from "../components/NewsContent/NewsContent";
+import RightSideNav from "../components/RightSideNav/RightSideNav";
 
 const Home = () => {
     return (
@@ -8,7 +11,11 @@ const Home = () => {
             <Header></Header>
             <Latest></Latest>
             <Navbar></Navbar>
-            <h1>Home</h1>
+            <div className="grid lg:grid-cols-4 my-8">
+                <div><LeftSideNav></LeftSideNav></div>
+                <div className="col-span-2"><NewsContent></NewsContent></div>
+                <div><RightSideNav></RightSideNav></div>
+            </div>
         </div>
     );
 };
