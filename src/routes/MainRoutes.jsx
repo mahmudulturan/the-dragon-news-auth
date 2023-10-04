@@ -9,6 +9,7 @@ const MainRoutes = createBrowserRouter([
         children: [
             {
                 path: '/',
+                loader: ()=> fetch('/news.json'),
                 element: <Home></Home>
             }
         ]
