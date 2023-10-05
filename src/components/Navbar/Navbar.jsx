@@ -1,6 +1,16 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
+import {useContext} from 'react';
+import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
+  const {user, logout} = useContext(AuthContext)
+  // const {image_url} = user
+  console.log(user);
+  const handleLogout = () => {
+    logout()
+    .then(() => console.log('signout'))
+    .catch(error => console.error(error))
+  }
   const navLinks = (
     <>
       <li>
@@ -48,7 +58,11 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
+                {
+                  user?.photoURL?
+                  <img src={user.photoURL} alt="" /> :
                 <FaUserCircle className="w-full h-full"></FaUserCircle>
+                }
               </div>
             </label>
             <ul
@@ -57,7 +71,12 @@ const Navbar = () => {
               <li>
                 <a className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  {
+                    user?.emailVerified?
+                    <span className="badge">Verified</span>
+                    :
+                    <span className="badge">New</span>
+                  }
                 </a>
               </li>
               <li>
@@ -68,9 +87,13 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link to="/login" className="py-2 px-8 text-white bg-[#403F3F]">
+          {
+            user?
+            <button onClick={handleLogout} className="py-2 px-8 text-white bg-[#403F3F]">Logout</button> :
+           <Link to="/login" className="py-2 px-8 text-white bg-[#403F3F]">
             Login
-          </Link>
+           </Link>
+          }
         </div>
       </div>
     </div>

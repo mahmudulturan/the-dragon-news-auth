@@ -1,7 +1,11 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
+
 const LoginRegister = () => {
     return (
         <div>
-            <h1>Login</h1>
+            <Navbar></Navbar>
+            <Outlet></Outlet>
         </div>
     );
 };
